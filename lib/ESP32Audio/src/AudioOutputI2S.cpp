@@ -187,7 +187,9 @@ bool AudioOutputI2S::ConsumeSample(int16_t sample[2])
   } else {
     s32 = ((Amplify(ms[RIGHTCHANNEL]))<<16) | (Amplify(ms[LEFTCHANNEL]) & 0xffff);
   }
-  return i2s_write_bytes((i2s_port_t)portNo, (const char*)&s32, sizeof(uint32_t), 0);
+ size_t i2s_bytes_write = 0;
+i2s_write((i2s_port_t)portNo, (const void*) &s32, sizeof(uint32_t), &i2s_bytes_write, 0);
+return i2s_bytes_write;
 #else
   uint32_t s32 = ((Amplify(ms[RIGHTCHANNEL]))<<16) | (Amplify(ms[LEFTCHANNEL]) & 0xffff);
   return i2s_write_sample_nb(s32); // If we can't store it, return false.  OTW true

@@ -27,19 +27,19 @@ String wpspin2string(uint8_t a[])
 
 void wpsInitConfig(bool mode)
 {
-    config.crypto_funcs = &g_wifi_default_wps_crypto_funcs;
-    if (mode)
-    {
-        config.wps_type = WPS_TYPE_PBC;
-    }
-    else
-    {
-        config.wps_type = WPS_TYPE_PIN;
-    }
-    strcpy(config.factory_info.manufacturer, ESP_MANUFACTURER);
-    strcpy(config.factory_info.model_number, ESP_MODEL_NUMBER);
-    strcpy(config.factory_info.model_name, ESP_MODEL_NAME);
-    strcpy(config.factory_info.device_name, ESP_DEVICE_NAME);
+    // config.crypto_funcs = &g_wifi_default_wps_crypto_funcs;
+    // // if (mode)
+    // // {
+    // //     config.wps_type = WPS_TYPE_PBC;
+    // // }
+    // // else
+    // // {
+    //     config.wps_type = WPS_TYPE_PIN;
+    // // }
+    // strcpy(config.factory_info.manufacturer, ESP_MANUFACTURER);
+    // strcpy(config.factory_info.model_number, ESP_MODEL_NUMBER);
+    // strcpy(config.factory_info.model_name, ESP_MODEL_NAME);
+    // strcpy(config.factory_info.device_name, ESP_DEVICE_NAME);
 }
 
 void WiFiEvent(WiFiEvent_t event, system_event_info_t info)
@@ -87,7 +87,7 @@ void Wps_run(bool mode)
 {
     WiFi.disconnect();
     M5m.Lcd.drawString("Starting WPS", 5, 30, 2);
-    WiFi.onEvent(WiFiEvent);
+    // WiFi.onEvent(WiFiEvent);
     WiFi.mode(WIFI_MODE_STA);
     wpsInitConfig(mode);
     esp_wifi_wps_enable(&config);
